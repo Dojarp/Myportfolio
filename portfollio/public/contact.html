@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("FOU-x1__FFOdRihJH"); // <-- replace with your EmailJS User ID
+    })();
+  </script>
+</head>
+<body>
+
+  <div id="contact">
+    <h2>Contact</h2>
+    <form id="contact-form" onsubmit="sendMail(event)">
+      <label for="uname">Name*</label>
+      <input type="text" id="uname" name="from_name" placeholder="Your name.." required>
+
+      <label for="email">Email*</label>
+      <input type="email" id="email" name="from_email" placeholder="Your email.." required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="Your phone number..">
+
+      <label for="Message">Your Message*</label>
+      <textarea id="Message" name="message" placeholder="Write something.." rows="5" required></textarea>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <div class="navi">
+    <a href="index.html">Home</a>
+    <a href="index.html#skills-heading">Skills</a>
+    <a href="index.html#Edu">Education</a>
+    <a href="index.html#projects">Projects</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

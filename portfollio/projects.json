@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Portfolio Website",
+    "description": "A personal portfolio to showcase my work."
+  },
+  {
+    "title": "Weather App",
+    "description": "An app that shows weather information based on your location."
+  },
+  {
+    "title": "Task Manager",
+    "description": "A simple app to manage daily tasks."
+  },
+  {
+    "title": "Simple Game",
+    "description": "A fun web-based game built using JavaScript and Canvas."
+  }
+]
