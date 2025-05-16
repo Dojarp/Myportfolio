@@ -49,6 +49,10 @@ document.getElementById("addProjectBtn").addEventListener("click", async functio
 function sendMail(e) {
   e.preventDefault();
 
+  const submitBtn = document.querySelector("#contact-form input[type='submit']");
+  submitBtn.disabled = true;
+  submitBtn.value = "Sending...";
+
   const name = document.getElementById("uname").value.trim();
   const email = document.getElementById("email").value.trim();
   const phone = document.getElementById("phone").value.trim();
@@ -59,9 +63,13 @@ function sendMail(e) {
     .then(function (response) {
       alert("Your message has been sent!");
       document.getElementById("contact-form").reset();
+      submitBtn.disabled = false;
+      submitBtn.value = "Submit";
     }, function (error) {
       alert("Failed to send.");
       console.error("Email sending error:", error);
+      submitBtn.disabled = false;
+      submitBtn.value = "Submit";
     });
 
   // MongoDB saving via backend
@@ -78,4 +86,7 @@ function sendMail(e) {
       console.error("MongoDB saving error:", error);
     });
 }
+
+
+
 
