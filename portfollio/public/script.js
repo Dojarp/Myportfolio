@@ -1,5 +1,5 @@
 async function loadProjects() {
-  const res = await fetch('http://localhost:5000/api/services');
+  const res = await fetch('https://myportfolio-gwtv.onrender.com/api/services');
   const projects = await res.json();
 
   const projectList = document.getElementById("projectList");
@@ -23,7 +23,7 @@ document.getElementById("addProjectBtn").addEventListener("click", async functio
   const description = document.getElementById("projectDescription").value.trim();
 
   if (title && description) {
-    const response = await fetch('http://localhost:5000/api/services', {
+    const response = await fetch('https://myportfolio-gwtv.onrender.com/api/services', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, description })
@@ -32,17 +32,15 @@ document.getElementById("addProjectBtn").addEventListener("click", async functio
     const data = await response.json();
     alert(data.message || "Project added!");
 
-    // reload projects list
     loadProjects();
 
-    // Clear input fields
     document.getElementById("projectTitle").value = "";
     document.getElementById("projectDescription").value = "";
-
   } else {
     alert("Please enter both a title and description.");
   }
 });
+
 
 
 
@@ -72,20 +70,20 @@ function sendMail(e) {
       submitBtn.value = "Submit";
     });
 
-  // MongoDB saving via backend
-  fetch('http://localhost:5000/api/contacts', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, phone, message })
+ // MongoDB saving via backend
+fetch('https://myportfolio-gwtv.onrender.com/api/contacts', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name, email, phone, message })
+})
+  .then(res => res.json())
+  .then(data => {
+    console.log(data.message);
   })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data.message);
-    })
-    .catch(error => {
-      console.error("MongoDB saving error:", error);
-    });
-}
+  .catch(error => {
+    console.error("MongoDB saving error:", error);
+  });
+
 
 
 
