@@ -11,13 +11,14 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://blinknub321:prajod@cluster0.knt2zif.mongodb.net/testt?retryWrites=true&w=majority&appName=Cluster0', {
+require('dotenv').config(); // Make sure this is at the top
+
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-
-.then(() => console.log('MongoDB Connected'))
-.catch(err => console.error(err));
+.then(() => console.log('✅ Connected to MongoDB Atlas'))
+.catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Mongoose Schema and Model
 const projectSchema = new mongoose.Schema({
