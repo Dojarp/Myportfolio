@@ -359,3 +359,14 @@ h1 {
   background: rgb(127, 30, 63);
   color: #fff6ee;
 }
+
+
+.site-footer {
+  color: rgb(127, 30, 63);
+  text-align: center;
+  padding: 20px 0;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+}
+
+
