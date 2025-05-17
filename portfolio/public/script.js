@@ -18,7 +18,6 @@ async function loadProjects() {
     });
   } catch (error) {
     console.error("Error loading projects:", error);
-    alert("Failed to load projects.");
   }
 }
 
@@ -46,7 +45,6 @@ document.getElementById("addProjectBtn").addEventListener("click", async functio
       document.getElementById("projectDescription").value = "";
     } catch (error) {
       console.error("Error adding project:", error);
-      alert("Failed to add project.");
     }
   } else {
     alert("Please enter both a title and description.");
@@ -69,7 +67,7 @@ async function sendMail(e) {
   try {
     // Send email using EmailJS
     await emailjs.sendForm('service_hdvzupq', 'template_h2wmnqg', '#contact-form');
-    alert("Your message has been sent via Email!");
+    alert("Your message has been sent!");
 
     // Save contact to backend (MongoDB)
     const response = await fetch('https://myportfolio-gwtv.onrender.com/api/contacts', {
