@@ -5,33 +5,30 @@ const path = require('path');
 
 const app = express();
 
-// Middleware
-app.use(cors({
-  origin: 'https://your-frontend-domain.com'
-}));
-
+// CORS (allow all origins — customize for production)
+app.use(cors());
 app.use(express.json());
+
+// Serve static files (if any) from public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Connect to MongoDB
-require('dotenv').config(); // Make sure this is at the top
+// ✅ MongoDB connection with custom DB name "testt"
+const MONGO_URI = "mongodb+srv://blinknub321:prajod@cluster0.mongodb.net/testt?retryWrites=true&w=majority";
 
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => console.log('✅ Connected to MongoDB Atlas'))
+.then(() => console.log('✅ Connected to MongoDB Atlas (DB: testt)'))
 .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Mongoose Schema and Model
+// === Project Schema & Routes ===
 const projectSchema = new mongoose.Schema({
   title: String,
   description: String
 });
-
 const Project = mongoose.model('Project', projectSchema);
 
-// Routes
 app.get('/api/services', async (req, res) => {
   const projects = await Project.find();
   res.json(projects);
@@ -44,27 +41,22 @@ app.post('/api/services', async (req, res) => {
   res.json({ message: 'Project added successfully!' });
 });
 
-// Server start
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-
-
-// CONTACTS!!!
-
+// === Contact Schema & Routes ===
 const contactSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
   message: String
 });
-
 const Contact = mongoose.model('Contact', contactSchema);
-
 
 app.post('/api/contacts', async (req, res) => {
   const { name, email, phone, message } = req.body;
   const newContact = new Contact({ name, email, phone, message });
   await newContact.save();
+  res.json({ message: 'Contact saved successfully!' });
 });
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
