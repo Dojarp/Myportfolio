@@ -69,15 +69,7 @@ async function sendMail(e) {
     await emailjs.sendForm('service_hdvzupq', 'template_h2wmnqg', '#contact-form');
     alert("Your message has been sent!");
 
-    // Save contact to backend (MongoDB)
-    const response = await fetch('https://myportfolio-gwtv.onrender.com/api/contacts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, phone, message })
-    });
-
-    const result = await response.json();
-    console.log(result.message || "Contact saved to database.");
+  
 
     // Reset form
     document.getElementById("contact-form").reset();
